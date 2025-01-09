@@ -1,15 +1,15 @@
 # Testing freeDiameter as DRA (Diameter Routing Agent)
 
-This Docker image is designed to test `freeDiameter` as a Diameter Routing Agent (DRA). The setup includes two interconnected DRA instances (`dra1` and `dra2`) and their respective peers (`peer1` and `peer2`). The purpose of the test is to verify that a message from `peer2` is correctly routed to `peer1` through the DRA instances.
+This Docker image is designed to test `freeDiameter` as a Diameter Routing Agent (DRA). The setup includes two interconnected DRA instances (`dra1` and `dra2`) and their respective peers (`peer11`/`peer12` and `peer2`). The purpose of the test is to verify that a message from `peer2` is correctly routed to `peer11`/`peer12` through the DRA instances.
 
 ## Testing the Setup
 
 ### Scenario Description
 
 - `dra1` and `dra2` are interconnected.
-- `dra1` knows only `peer1`.
+- `dra1` knows only `peer11` and `peer12`.
 - `dra2` knows only `peer2`.
-- The test involves sending a signal to `peer2` to trigger a message and observing if it is correctly routed to `peer1` via the DRAs.
+- The test involves sending a signal to `peer2` to trigger a message and observing if it is correctly routed to `peer11`/`peer12` via the DRAs.
 
 ### Steps to Run the Test
 
@@ -21,23 +21,24 @@ This Docker image is designed to test `freeDiameter` as a Diameter Routing Agent
    ```
 
 2. **Monitor Logs**:
-   Start monitoring the logs of `peer1`:
+   Start monitoring the logs of `peer11` and `peer12`:
 
    ```bash
-   tail -f /tmp/peer1.log &
+   tail -f /tmp/peer11.log &
+   tail -f /tmp/peer12.log &
    ```
 
 3. **Trigger the Message**:
    Send the `SIGUSR1` signal to `peer2`:
 
    ```bash
-   kill -10 <PID4>
+   kill -10 <PID5>
    ```
 
    Replace `<PID4>` with the process ID of `peer2` (printed by the script).
 
 4. **Verify the Message Routing**:
-   Check the `peer1` log for the following message:
+   Check the `peer11` and `peer12` logs for the following message:
 
    ```
    ECHO Test-Request received from 'peer2.localdomain', replying...
@@ -48,7 +49,8 @@ This Docker image is designed to test `freeDiameter` as a Diameter Routing Agent
 Logs for each instance are stored in `/tmp/`:
 
 - `dra1`: `/tmp/dra1.log`
-- `peer1`: `/tmp/peer1.log`
+- `peer11`: `/tmp/peer11.log`
+- `peer12`: `/tmp/peer12.log`
 - `dra2`: `/tmp/dra2.log`
 - `peer2`: `/tmp/peer2.log`
 
