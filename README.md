@@ -32,15 +32,15 @@ This Docker image is designed to test `freeDiameter` as a Diameter Routing Agent
    Send the `SIGUSR1` signal to `peer2`:
 
    ```bash
-   kill -10 <PID5>
+   kill -10 <PID2>
    ```
 
-   Replace `<PID4>` with the process ID of `peer2` (printed by the script).
+   Replace `<PID2>` with the process ID of `peer2` (printed by the script).
 
 4. **Verify the Message Routing**:
    Check the `peer11` and `peer12` logs for the following message:
 
-   ```
+   ```console
    ECHO Test-Request received from 'peer2.localdomain', replying...
    ```
 
