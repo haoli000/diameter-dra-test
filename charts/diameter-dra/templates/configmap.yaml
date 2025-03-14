@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "diameter-dra.fullname" . }}-config
+data:
+  dra.conf: |
+    # Generated configuration for {{ .Release.Name }}
+    Identity = "NODE_IDENTITY.{{ .Values.realm }}";
+    Realm = "{{ .Values.realm }}";
+
+    Port = 3868;
+    # SecPort = 3869;
+
+    TLS_Cred = "/etc/freeDiameter/cert.pem", "/etc/freeDiameter/privkey.pem";
+    TLS_CA = "/etc/freeDiameter/cert.pem";
+    TLS_DH_File = "/etc/freeDiameter/dh.pem";
+
+    {{range .Values.peers -}}
+    ConnectPeer = "{{ . }}" { NO_TLS; };
+    {{end -}}
+
+    LoadExtension = "/usr/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx" : "0x0080";

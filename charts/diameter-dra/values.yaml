@@ -1,0 +1,20 @@
+image:
+  repository: haoli1/freediameter
+  tag: latest
+
+replicaCount: 1
+
+diameterIdentityPrefix: dra
+realm: smsf.example
+
+peers:
+  - host101.smsf.example
+  - host102.smsf.example
+  - host201.smsc.example
+
+annotations:
+  k8s.v1.cni.cncf.io/networks: smsf-sctp-net1,smsf-sctp-net2
+
+networkIPs:
+  net1: 10.93.233.111/24
+  net2: 10.93.234.111/24

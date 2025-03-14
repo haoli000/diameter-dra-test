@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "diameter-dra.fullname" . }}
+spec:
+  serviceName: {{ include "diameter-dra.fullname" . }}-headless
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "diameter-dra.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "diameter-dra.name" . }}
+      annotations:
+        {{- toYaml .Values.annotations | nindent 8 }}
+    spec:
+      initContainers:
+        - name: conf-init
+          image: alpine/openssl
+          command:
+            - sh
+            - -c
+            - |
+              # Set the full identity with realm
+              FULL_IDENTITY="${NODE_IDENTITY}.${REALM}"
+              
+              # Generate certificates with the full identity
+              openssl req -new -batch -x509 -days 3650 -nodes \
+              -newkey rsa:2048 \
+              -out /etc/freeDiameter/cert.pem \
+              -keyout /etc/freeDiameter/privkey.pem \
+              -subj "/CN=${FULL_IDENTITY}" && 
+              openssl dhparam -out /etc/freeDiameter/dh.pem 2048
+
+              # Copy the template config
+              cp /etc/freeDiameter/config-template/dra.conf /etc/freeDiameter/diameter.conf
+              
+              # Replace NODE_IDENTITY placeholder with actual value
+              sed -i "s/NODE_IDENTITY/${NODE_IDENTITY}/g" /etc/freeDiameter/diameter.conf
+
+              # Show results
+              ls -l /etc/freeDiameter
+              cat /etc/freeDiameter/diameter.conf
+          env:
+            - name: NODE_IDENTITY
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: REALM
+              value: {{ .Values.realm }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/freeDiameter
+            - name: tpl-volume
+              mountPath: /etc/freeDiameter/config-template
+        - name: network-init
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              while [ ! -d /sys/class/net/net1 ]; do sleep 1; done
+              ip addr add {{ .Values.networkIPs.net1 }} dev net1
+              ip link set net1 up
+              while [ ! -d /sys/class/net/net2 ]; do sleep 1; done
+              ip addr add {{ .Values.networkIPs.net2 }} dev net2
+              ip link set net2 up
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN              
+      containers:
+        - name: diameter-dra
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - name: diameter
+              containerPort: 3868
+            - name: diameter-secure
+              containerPort: 3869
+          env:
+            - name: NODE_IDENTITY
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/freeDiameter
+      volumes:
+        - name: config-volume
+          emptyDir: {}
+        - name: tpl-volume
+          configMap:
+            name: {{ include "diameter-dra.fullname" . }}-config
+
