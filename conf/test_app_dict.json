@@ -1,0 +1,136 @@
+{
+    "Vendors": [
+      {
+        "Code": 999999,
+        "Name": "app_test vendor"
+      }
+    ],
+    "Applications": [
+      {
+        "Code": 16777215,
+        "Name": "app_test application"
+      }
+    ],
+    "AVPs": [
+      {
+        "Code": 16777215,
+        "Vendor": 999999,
+        "Name": "Test-AVP",
+        "Type": "Integer32",
+        "Flags": {
+          "Must": "V"
+        }
+      },
+      {
+        "Code": 16777214,
+        "Vendor": 999999,
+        "Name": "Test-Payload-AVP",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V"
+        }
+      }
+    ],
+    "Commands": [
+      {
+        "Code": 16777214,
+        "Name": "Test-Request",
+        "Application": "app_test application",
+        "Flags": {
+          "Must": "RP"
+        }
+      },
+      {
+        "Code": 16777214,
+        "Name": "Test-Answer",
+        "Application": "app_test application",
+        "Flags": {
+          "Must": "P",
+          "MustNot": "R"
+        }
+      }
+    ],
+    "CommandRules": [
+      {
+        "Command": "Test-Request",
+        "Content": [
+          {
+            "AVP": "Session-Id",
+            "Min": 1,
+            "Max": 1,
+            "First": true
+          },
+          {
+            "AVP": "Test-AVP",
+            "Vendor": 999999,
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Origin-Host",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Origin-Realm",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Destination-Realm",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Destination-Host",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "Test-Payload-AVP",
+            "Vendor": 999999,
+            "Min": 0,
+            "Max": 1
+          }
+        ]
+      },
+      {
+        "Command": "Test-Answer",
+        "Content": [
+          {
+            "AVP": "Session-Id",
+            "Min": 1,
+            "Max": 1,
+            "First": true
+          },
+          {
+            "AVP": "Test-AVP",
+            "Vendor": 999999,
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Origin-Host",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Origin-Realm",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Result-Code",
+            "Min": 1,
+            "Max": 1
+          },
+          {
+            "AVP": "Test-Payload-AVP",
+            "Vendor": 999999,
+            "Min": 0,
+            "Max": 1
+          }
+        ]
+      }
+    ]
+  }

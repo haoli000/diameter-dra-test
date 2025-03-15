@@ -1,0 +1,405 @@
+{
+    "Vendors": [
+      {
+        "Code": 10415,
+        "Name": "3GPP"
+      }
+    ],
+    "Applications": [
+      {
+        "Code": 16777313,
+        "Name": "SGd-Application"
+      }
+    ],
+    "AVPs": [
+      {
+        "Code": 1400,
+        "Vendor": 10415,
+        "Name": "SMS-Information",
+        "Type": "Grouped",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1401,
+        "Vendor": 10415,
+        "Name": "Recipient-Info",
+        "Type": "Grouped",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1402,
+        "Vendor": 10415,
+        "Name": "Originator-Received-Address",
+        "Type": "Grouped",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1403,
+        "Vendor": 10415,
+        "Name": "SM-Protocol-ID",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1404,
+        "Vendor": 10415,
+        "Name": "SM-Data-Coding-Scheme",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1405,
+        "Vendor": 10415,
+        "Name": "SM-User-Data-Header",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1406,
+        "Vendor": 10415,
+        "Name": "SM-Message-Type",
+        "Type": "Enumerated",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        },
+        "EnumValues": [
+          {
+            "Code": 0,
+            "Name": "SUBMISSION"
+          },
+          {
+            "Code": 1,
+            "Name": "DELIVERY_REPORT"
+          },
+          {
+            "Code": 2,
+            "Name": "SM-SERVICE-REQUEST"
+          }
+        ]
+      },
+      {
+        "Code": 1407,
+        "Vendor": 10415,
+        "Name": "SM-Discharge-Time",
+        "Type": "Time",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 1408,
+        "Vendor": 10415,
+        "Name": "SM-Service-Type",
+        "Type": "Enumerated",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        },
+        "EnumValues": [
+          {
+            "Code": 0,
+            "Name": "VAS4SMS-SHORT-MESSAGE-CONTENT-PROCESSING"
+          },
+          {
+            "Code": 1,
+            "Name": "VAS4SMS-SHORT-MESSAGE-FORWARDING"
+          },
+          {
+            "Code": 2,
+            "Name": "VAS4SMS-SHORT-MESSAGE-FORWARDING-MULTIPLE"
+          },
+          {
+            "Code": 3,
+            "Name": "VAS4SMS-SHORT-MESSAGE-FILTERING"
+          },
+          {
+            "Code": 4,
+            "Name": "VAS4SMS-SHORT-MESSAGE-RECEIPT"
+          },
+          {
+            "Code": 5,
+            "Name": "VAS4SMS-SHORT-MESSAGE-NETWORK-STORAGE"
+          }
+        ]
+      },
+      {
+        "Code": 3400,
+        "Vendor": 10415,
+        "Name": "SM-RP-UI",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 3401,
+        "Vendor": 10415,
+        "Name": "SM-RP-SMEA",
+        "Type": "OctetString",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 3402,
+        "Vendor": 10415,
+        "Name": "SRR-Flags",
+        "Type": "Unsigned32",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 3403,
+        "Vendor": 10415,
+        "Name": "SM-Delivery-Failure-Cause",
+        "Type": "Grouped",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 3404,
+        "Vendor": 10415,
+        "Name": "SM-Enumerated-Delivery-Failure-Cause",
+        "Type": "Enumerated",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        },
+        "EnumValues": [
+          {
+            "Code": 0,
+            "Name": "MEMORY_CAPACITY_EXCEEDED"
+          },
+          {
+            "Code": 1,
+            "Name": "EQUIPMENT_PROTOCOL_ERROR"
+          },
+          {
+            "Code": 2,
+            "Name": "EQUIPMENT_NOT_SM_EQUIPPED"
+          },
+          {
+            "Code": 3,
+            "Name": "UNKNOWN_SERVICE_CENTRE"
+          },
+          {
+            "Code": 4,
+            "Name": "SC_CONGESTION"
+          },
+          {
+            "Code": 5,
+            "Name": "INVALID_SME_ADDRESS"
+          },
+          {
+            "Code": 6,
+            "Name": "USER_NOT_SC_USER"
+          }
+        ]
+      },
+      {
+        "Code": 3405,
+        "Vendor": 10415,
+        "Name": "SM-Delivery-Timer",
+        "Type": "Unsigned32",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      },
+      {
+        "Code": 3406,
+        "Vendor": 10415,
+        "Name": "SM-Delivery-Start-Time",
+        "Type": "Time",
+        "Flags": {
+          "Must": "V",
+          "MustNot": "M"
+        }
+      }
+    ],
+    "Commands": [
+      {
+        "Code": 8388647,
+        "Name": "MO-Forward-Short-Message-Request",
+        "Application": "SGd-Application",
+        "Flags": {
+          "Must": "R"
+        }
+      },
+      {
+        "Code": 8388647,
+        "Name": "MO-Forward-Short-Message-Answer",
+        "Application": "SGd-Application",
+        "Flags": {
+          "MustNot": "R"
+        }
+      },
+      {
+        "Code": 8388648,
+        "Name": "MT-Forward-Short-Message-Request",
+        "Application": "SGd-Application",
+        "Flags": {
+          "Must": "R"
+        }
+      },
+      {
+        "Code": 8388648,
+        "Name": "MT-Forward-Short-Message-Answer",
+        "Application": "SGd-Application",
+        "Flags": {
+          "MustNot": "R"
+        }
+      },
+      {
+        "Code": 8388649,
+        "Name": "Alert-Service-Centre-Request",
+        "Application": "SGd-Application",
+        "Flags": {
+          "Must": "R"
+        }
+      },
+      {
+        "Code": 8388649,
+        "Name": "Alert-Service-Centre-Answer",
+        "Application": "SGd-Application",
+        "Flags": {
+          "MustNot": "R"
+        }
+      }
+    ],
+    "CommandRules": [
+      {
+        "Command": "MO-Forward-Short-Message-Request",
+        "Content": [
+          {
+            "AVP": "Session-Id",
+            "Min": 1
+          },
+          {
+            "AVP": "Auth-Application-Id",
+            "Min": 1
+          },
+          {
+            "AVP": "Origin-Host",
+            "Min": 1
+          },
+          {
+            "AVP": "Origin-Realm",
+            "Min": 1
+          },
+          {
+            "AVP": "Destination-Realm",
+            "Min": 1
+          },
+          {
+            "AVP": "SM-RP-UI",
+            "Min": 1
+          }
+        ]
+      },
+      {
+        "Command": "MT-Forward-Short-Message-Request",
+        "Content": [
+          {
+            "AVP": "Session-Id",
+            "Min": 1
+          },
+          {
+            "AVP": "Auth-Application-Id",
+            "Min": 1
+          },
+          {
+            "AVP": "Origin-Host",
+            "Min": 1
+          },
+          {
+            "AVP": "Origin-Realm",
+            "Min": 1
+          },
+          {
+            "AVP": "Destination-Realm",
+            "Min": 1
+          },
+          {
+            "AVP": "SM-RP-UI",
+            "Min": 1
+          }
+        ]
+      }
+    ],
+    "AVPRules": [
+      {
+        "AVP": "SMS-Information",
+        "Vendor": 10415,
+        "Content": [
+          {
+            "AVP": "SM-Message-Type",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "SM-Service-Type",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "SM-Discharge-Time",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "SM-Protocol-ID",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "SM-Data-Coding-Scheme",
+            "Min": 0,
+            "Max": 1
+          },
+          {
+            "AVP": "SM-User-Data-Header",
+            "Min": 0,
+            "Max": 1
+          }
+        ]
+      },
+      {
+        "AVP": "SM-Delivery-Failure-Cause",
+        "Vendor": 10415,
+        "Content": [
+          {
+            "AVP": "SM-Enumerated-Delivery-Failure-Cause",
+            "Min": 0,
+            "Max": 1
+          }
+        ]
+      }
+    ]
+  }

@@ -19,4 +19,4 @@ data:
     ConnectPeer = "{{ . }}" { NO_TLS; };
     {{end -}}
 
-    LoadExtension = "/usr/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx" : "0x0080";
+    LoadExtension = "/usr/local/lib/freeDiameter/dbg_msg_dumps.fdx" : "0x0080";

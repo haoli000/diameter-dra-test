@@ -3,19 +3,19 @@
 echo "Starting 5 freeDiameterd instances..."
 
 # Start the instances of freeDiameter
-/usr/local/bin/freeDiameterd -c /conf/dra1.conf -d > /tmp/dra1.log 2>&1 &
+/usr/local/bin/freeDiameterd -c /conf/dra1.conf -dd > /tmp/dra1.log 2>&1 &
 PID1=$!
-sleep 1
-/usr/local/bin/freeDiameterd -c /conf/freeDiameter11.conf -d > /tmp/peer11.log 2>&1 &
+sleep 2
+/usr/local/bin/freeDiameterd -c /conf/freeDiameter11.conf -dd > /tmp/peer11.log 2>&1 &
 PID2=$!
-sleep 1
-/usr/local/bin/freeDiameterd -c /conf/freeDiameter12.conf -d > /tmp/peer12.log 2>&1 &
+sleep 2
+/usr/local/bin/freeDiameterd -c /conf/freeDiameter12.conf -dd > /tmp/peer12.log 2>&1 &
 PID3=$!
-sleep 1
-/usr/local/bin/freeDiameterd -c /conf/dra2.conf -d > /tmp/dra2.log 2>&1 &
+sleep 2
+/usr/local/bin/freeDiameterd -c /conf/dra2.conf -dd > /tmp/dra2.log 2>&1 &
 PID4=$!
-sleep 1
-/usr/local/bin/freeDiameterd -c /conf/freeDiameter2.conf -d > /tmp/peer2.log 2>&1 &
+sleep 2
+/usr/local/bin/freeDiameterd -c /conf/freeDiameter2.conf -dd > /tmp/peer2.log 2>&1 &
 PID5=$!
 
 echo "=== freeDiameterd processes:"
@@ -29,8 +29,10 @@ echo "=== To test, run:"
 echo "    tail -f /tmp/peer11.log &"
 echo "    tail -f /tmp/peer12.log &"
 echo "    kill -10" $PID5
-echo "=== This message should show up in either peer11 or peer12 log:"
-echo "    > ECHO Test-Request received from 'peer2.localdomain', replying... <"
+echo "=== Depending on the verbose level, one of these messages should show up in either peer11 or peer12 log:"
+echo "    > ECHO Test-Request received from 'peer11.left.side', replying... <"
+echo "or:"
+echo "    > RECV 2ae8944a (Ok) Status: 2001 From 'peer12.left.side' ('left.side')... <"
 
 # Start bash interactively
 exec bash
